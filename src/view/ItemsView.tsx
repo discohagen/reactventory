@@ -1,10 +1,12 @@
-import {useEffect, useState} from "react"
-import {ItemModel} from "../model/ItemModel"
+import {useEffect} from "react"
 import axiosInstance from "../api/axiosInstance"
+import {useItemContext} from "../context/ItemContext.tsx";
+import {useFetchItems} from "../hook/ItemHooks.ts";
 
 
 function ItemsView() {
-    const [items, setItems] = useState<ItemModel[]>([])
+    const {items, setItems} = useItemContext()
+    useFetchItems()
 
     useEffect(() => {
         axiosInstance.get("/api/items")
