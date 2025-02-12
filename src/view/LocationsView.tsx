@@ -1,6 +1,6 @@
 import axiosInstance from "../api/axiosInstance"
-import {useLocationContext} from "../context/LocationContext.tsx";
-import {useFetchLocations} from "../hook/LocationHooks.ts";
+import {useFetchLocations, useLocationContext} from "../hook/LocationHooks.ts";
+import {Link} from "react-router-dom";
 
 
 function LocationsView() {
@@ -18,6 +18,9 @@ function LocationsView() {
     return (
         <div>
             <h1>Locations</h1>
+            <Link to="/locations/create">
+                <button>Create Location</button>
+            </Link>
             <table>
                 <thead>
                 <tr>
@@ -29,12 +32,12 @@ function LocationsView() {
                 <tbody>
                 {locations.map(location => (
                     <tr key={location.id}>
-                        <th>{location.name}</th>
-                        <th>{location.description}</th>
-                        <th>{location.parentLocation?.name}</th>
-                        <th>
+                        <td>{location.name}</td>
+                        <td>{location.description}</td>
+                        <td>{location.parentLocation?.name}</td>
+                        <td>
                             <button onClick={() => handleDelete(location.id)}>delete</button>
-                        </th>
+                        </td>
                     </tr>
                 ))}
                 </tbody>
