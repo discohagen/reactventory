@@ -28,7 +28,6 @@ export function useCreateLocation() {
 
     async function createLocation(name: string, description: string) {
         setIsLoading(true)
-        setError(null)
         try {
             const response = await axiosInstance.post("/api/locations", {name, description})
             setLocations(prevLocations => [...prevLocations, response.data])
@@ -41,4 +40,21 @@ export function useCreateLocation() {
     }
 
     return {createLocation, isLoading, error, success}
+}
+
+export function useDeleteLocation() {
+    const {locations, setLocations} = useLocationContext()
+    const [error, setError] = useState<string | null>(null)
+    const [success, setSuccess] = useState(false)
+
+    async function deleteLocation(id: number) {
+        axiosInstance.delete(`/api/locations/${id}`)
+            .then(() => {
+                setLocations(locations.filter(location => location.id !== id))
+                setSuccess(true)
+            })
+            .catch(error => setError("Error deleting Location: " + error))
+    }
+
+    return {deleteLocation, error, success}
 }

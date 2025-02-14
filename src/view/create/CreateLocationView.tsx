@@ -9,7 +9,7 @@ function CreateLocationView() {
 
     function handleSubmit(event: React.FormEvent) {
         event.preventDefault()
-        createLocation(name, description)
+        createLocation(name, description).then()
     }
 
     return (

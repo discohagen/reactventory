@@ -1,22 +1,20 @@
-import axiosInstance from "../api/axiosInstance"
-import {useFetchLocations, useLocationContext} from "../hook/LocationHooks.ts";
+import {useDeleteLocation, useFetchLocations, useLocationContext} from "../hook/LocationHooks.ts";
 import {Link} from "react-router-dom";
 
 
 function LocationsView() {
-    const {locations, setLocations} = useLocationContext()
+    const {locations} = useLocationContext()
+    const {deleteLocation, error, success} = useDeleteLocation()
     useFetchLocations()
 
     const handleDelete = (id: number) => {
-        axiosInstance.delete(`/api/locations/${id}`)
-            .then(() => {
-                setLocations(locations.filter(location => location.id !== id))
-            })
-            .catch(error => console.error("Error deleting Location: ", error))
+        deleteLocation(id).then()
     }
 
     return (
         <div>
+            {error && <p>{error}</p>}
+            {success && <p>Location deleted successfully</p>}
             <h1>Locations</h1>
             <Link to="/locations/create">
                 <button>Create Location</button>
