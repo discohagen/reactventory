@@ -1,7 +1,6 @@
 import {useEffect} from "react"
 import axiosInstance from "../api/axiosInstance"
-import {useItemContext} from "../context/ItemContext.tsx";
-import {useFetchItems} from "../hook/ItemHooks.ts";
+import {useFetchItems, useItemContext} from "../hook/ItemHooks.ts";
 
 
 function ItemsView() {
@@ -12,7 +11,7 @@ function ItemsView() {
         axiosInstance.get("/api/items")
             .then(response => setItems(response.data))
             .catch(error => console.error("Error fetching Items: ", error))
-    }, [])
+    }, [setItems])
 
     const handleDelete = (id: number) => {
         axiosInstance.delete(`/api/items/${id}`)
