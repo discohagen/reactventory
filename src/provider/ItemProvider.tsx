@@ -1,14 +1,13 @@
-import {ReactNode, useState} from "react";
-import {ItemModel} from "../model/ItemModel.ts";
-import {ItemContext} from "../context/ItemContext.tsx";
+import {ReactNode} from "react";
+import {ItemModel} from "../models/ItemModel.ts";
+import {ItemContext} from "../contexts/ItemContext.tsx";
+import GenericProvider from "./GenericProvider.tsx";
 
 function ItemProvider({children}: { children: ReactNode }) {
-    const [items, setItems] = useState<ItemModel[]>([])
-
     return (
-        <ItemContext.Provider value={{items, setItems}}>
+        <GenericProvider<ItemModel> context={ItemContext}>
             {children}
-        </ItemContext.Provider>
+        </GenericProvider>
     )
 }
 

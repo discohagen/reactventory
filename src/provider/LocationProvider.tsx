@@ -1,14 +1,13 @@
-import {ReactNode, useState} from "react";
-import {LocationModel} from "../model/LocationModel.ts";
-import {LocationContext} from "../context/LocationContext.tsx";
+import {ReactNode} from "react";
+import {LocationModel} from "../models/LocationModel.ts";
+import {LocationContext} from "../contexts/LocationContext.tsx";
+import GenericProvider from "./GenericProvider.tsx";
 
 function LocationProvider({children}: { children: ReactNode }) {
-    const [locations, setLocations] = useState<LocationModel[]>([])
-
     return (
-        <LocationContext.Provider value={{locations, setLocations}}>
+        <GenericProvider<LocationModel> context={LocationContext}>
             {children}
-        </LocationContext.Provider>
+        </GenericProvider>
     )
 }
 
