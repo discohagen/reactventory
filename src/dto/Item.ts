@@ -1,6 +1,8 @@
-export interface Item {
-    id: number
-    name: string
-    description: string
-    quantity: number
+import { Identifiable } from "../types.ts"
+
+export interface Item extends Identifiable {
+  name: string
+  description: string
+  quantity: number
+  locationId: number
 }

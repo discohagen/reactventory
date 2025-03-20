@@ -1,16 +1,28 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {ItemList} from "./view/ItemList.tsx";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom"
+import { ViewAllItems } from "./view/ViewAllItems.tsx"
+import { LocationProvider } from "./state/provider/LocationProvider.tsx"
+import { ItemProvider } from "./state/provider/ItemProvider.tsx"
+import { ViewAllLocations } from "./view/ViewAllLocations.tsx"
 
 function App() {
 
-    return (
+  return (
+    <ItemProvider>
+      <LocationProvider>
         <BrowserRouter>
-            <h1>Inventory</h1>
-            <Routes>
-                <Route path={"/"} element={<ItemList/>}/>
-            </Routes>
+          <nav>
+            <Link to={"/"}>Inventory</Link>
+            <Link to={"/items"}>Items</Link>
+            <Link to={"/locations"}>Locations</Link>
+          </nav>
+          <Routes>
+            <Route path={"/items"} element={<ViewAllItems />} />
+            <Route path={"/locations"} element={<ViewAllLocations />} />
+          </Routes>
         </BrowserRouter>
-    )
+      </LocationProvider>
+    </ItemProvider>
+  )
 }
 
 export default App
