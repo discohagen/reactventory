@@ -13,13 +13,13 @@ export function useGenericContext<T>(context: React.Context<GenericContextProps<
 }
 
 export function useFetchData<T>(context: React.Context<GenericContextProps<T> | undefined>, endpoint: string) {
-  const { setData } = useGenericContext(context)
+  const { data, setData } = useGenericContext(context)
 
   useEffect(() => {
     axiosInstance.get(endpoint)
       .then(response => setData(response.data))
       .catch(error => console.error(`Error fetching data from ${endpoint}: ${error}`))
-  }, [setData, endpoint, context])
+  }, [data, setData, endpoint, context])
 }
 
 export function useCreateData<T>(context: React.Context<GenericContextProps<T> | undefined>,
