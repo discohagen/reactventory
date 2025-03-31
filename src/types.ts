@@ -1,3 +1,4 @@
-export interface Identifiable {
-  id: number
+export enum FormMode {
+  CREATE = "create",
+  VIEW = "view"
 }
